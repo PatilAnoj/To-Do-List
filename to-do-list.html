@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do-List</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script type="text/javascript">
+            let arr=[];
+          function addTask()
+          {
+            let taskText=document.getElementById("listText");
+            let vallue=taskText.value;
+            arr.push(vallue);  
+            taskText.value="";
+            refreshTask();         
+          }
+          function refreshTask(){
+            let OL= document.getElementsByTagName("ol")[0];
+            OL.innerHTML="";
+            for(let data in arr){ 
+               let element=arr[data];
+               let li=document.createElement("li");
+               li.classList.add("list-group-item")
+               li.innerHTML=`<div class="row">
+                  <div class="col-10">${element}</div>
+                  <div class="col-2 text-right"><button type="button" class="btn btn-danger" onclick="deleteTask(${data})"><span class="bi bi-trash3"></span></button></div>
+                  </div>`;
+               document.getElementById("ool").appendChild(li);
+               
+            } 
+          }
+          function deleteTask(index){
+            arr.splice(index,1);
+            refreshTask();
+            console.log("deletetask ",arr);            
+          }
+    </script>
+</head>
+<body class="container-fluid  ">
+   <h1 class=" text-center  m-4 bi bi-pen-fill border border-1 p-2 rounded-pill border-warning">To-Do-List</h1>
+   <div class="container  w-50  p-3">
+     <div class="container ">
+        <input type="text" id="listText" class="form-control h-50 m-2">
+        <button type="button" class="btn btn-primary m-2" onclick="addTask()">ADD TASK</button>
+     </div>
+     <div class="container m-2 p-2">
+        <ol class="list-group gap-2  w-75" id="ool">
+            
+        </ol>
+
+     </div>
+   </div> 
+</body>
+</html>
